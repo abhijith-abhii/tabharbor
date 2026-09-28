@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "TabHarbor",
+  "version": "1.0.0",
+  "description": "Group tabs, save workspaces and focus without external services.",
+  "permissions": [
+    "tabs",
+    "tabGroups",
+    "storage",
+    "alarms"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}

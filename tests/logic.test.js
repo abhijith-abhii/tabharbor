@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {groups,duplicates,workspace,validateWorkspace,safeUrl} from '../logic.js';
+const tabs=[{id:1,url:'https://example.org/a'},{id:2,url:'https://example.org/a'},{id:3,url:'https://example.org/b'},{id:4,url:'chrome://settings'},{id:5,url:'https://example.org/a',pinned:true}];
+test('groups only eligible domain tabs',()=>assert.deepEqual(groups(tabs),[{host:'example.org',ids:[1,2,3]}]));
+test('duplicates preserve first and pinned',()=>assert.deepEqual(duplicates(tabs),[2]));
+test('queries and fragments stay distinct',()=>assert.deepEqual(duplicates([{id:1,url:'https://x.org/?q=1'},{id:2,url:'https://x.org/?q=2'}]),[]));
+test('workspace excludes unsupported urls and deduplicates',()=>assert.equal(workspace(tabs,'Study').urls.length,2));
+test('name validation',()=>assert.throws(()=>workspace(tabs,'')));
+test('unsafe restore rejected',()=>assert.throws(()=>validateWorkspace({name:'bad',urls:['javascript:alert(1)']})));
+test('data and file urls excluded',()=>{assert.equal(safeUrl('file:///etc/passwd'),null);assert.equal(safeUrl('data:text/html,x'),null)});
+test('empty session rejected',()=>assert.throws(()=>workspace([],'Empty')));

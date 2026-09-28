@@ -1,0 +1,1 @@
+chrome.alarms.onAlarm.addListener(async alarm=>{if(alarm.name==='focus'){await chrome.action.setBadgeText({text:'Done'});await chrome.storage.local.remove('focusEnds')}});

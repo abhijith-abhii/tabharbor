@@ -1,0 +1,23 @@
+✔ groups only eligible domain tabs (1.139209ms)
+✔ duplicates preserve first and pinned (0.078625ms)
+✔ queries and fragments stay distinct (0.434ms)
+✔ workspace excludes unsupported urls and deduplicates (5.014625ms)
+✔ name validation (0.186833ms)
+✔ unsafe restore rejected (0.081541ms)
+✔ data and file urls excluded (0.049709ms)
+✔ empty session rejected (0.047875ms)
+✔ popup domain grouping calls Chrome with unpinned tab IDs (3.242917ms)
+✔ duplicate preview cannot close tabs until explicit confirmation action (1.039458ms)
+✔ duplicate closure rechecks tabs that became pinned (1.213916ms)
+✔ saved workspace is persisted and restored in a new window (1.51125ms)
+✔ storage failure produces a visible error (0.638667ms)
+✔ focus timer is scheduled and cancellation clears its state (25.780459ms)
+✔ invalid timer cannot schedule an alarm (0.780458ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76.763583
