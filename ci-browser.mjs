@@ -23,7 +23,7 @@ try {
  await popup.getByRole('button',{name:'Restore in new window',exact:true}).click();await expect.poll(async()=>(await popup.evaluate(()=>chrome.windows.getAll({populate:true}))).length).toBe(2);checks.push('Workspace persisted via storage API and restored to an actual new window');
  await popup.getByLabel('Minutes',{exact:true}).fill('1');await popup.getByRole('button',{name:'Start focus timer',exact:true}).click();await expect(popup.locator('#timer')).toContainText('Ends');expect((await popup.evaluate(()=>chrome.alarms.get('focus'))).name).toBe('focus');
  await popup.getByRole('button',{name:'Cancel timer',exact:true}).click();await expect(popup.locator('#timer')).toHaveText('No timer running');expect(await popup.evaluate(()=>chrome.alarms.get('focus'))).toBeUndefined();checks.push('Actual timer alarm scheduled, badge set, and timer cancelled');
- await mkdir('reports/screenshots',{recursive:true});await popup.screenshot({path:'reports/screenshots/extension.png',fullPage:true});
+ await mkdir('reports/screenshots',{recursive:true});await popup.locator('body').screenshot({path:'reports/screenshots/extension.png'});
  await writeFile('reports/browser-integration.json',JSON.stringify({passed:true,browser:'Playwright bundled Chromium, isolated Linux CI profile',network:'Synthetic fixture pages; no personal tabs or browser data',checks},null,2));
  console.log(JSON.stringify({passed:true,checks},null,2));
 } finally {await context.close();await rm(profile,{recursive:true,force:true})}
