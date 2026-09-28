@@ -23,11 +23,15 @@ Follow the README installation block, then: Load the folder as an unpacked exten
 
 ## Five interview questions
 
-1. **What problem does this project solve, and what is its unit of work?** Explain organize crowded browser sessions, identify students and developers as the audience, and trace one concrete example through the files above. Use the demonstration output rather than hypothetical impact.
-2. **Why did you choose the first design decision?** Manifest V3 permissions are limited to tabs, groups, local storage and alarms. Show the corresponding implementation and a test that would fail if that property were removed.
-3. **How do you protect correctness when inputs or execution change?** Exact URL matching avoids merging tabs whose query strings or fragments differ. Explain the relevant invalid-input or edge-case test and distinguish a checked property from an untested assumption.
-4. **How do you make results inspectable and reproducible?** Duplicate closure requires a preview and explicit click; pinned tabs are protected. Point to actual outputs and recorded commands. Explain why a successful example is weaker evidence than a tested boundary or independently reconciled total.
-5. **What would you improve before real deployment or real-data use?** Chrome-compatible desktop extension only. Saved workspaces store URLs locally without encryption. Restore opens a new window; it does not restore authenticated state or tab histories. Timer badges need a running browser. Store publication is not included. Choose one limitation, describe the missing evidence, and propose a measurable acceptance check rather than promising production readiness.
+1. **Why a Manifest V3 service worker?** The popup can close while a timer remains active. A background alarm listener handles the completion badge without keeping the popup open.
+
+2. **What counts as a duplicate?** Exact normalized HTTP(S) URLs match; query strings and fragments remain significant. Pinned tabs are excluded from closure, and the current tabs are rechecked after the preview.
+
+3. **What is actually saved in a workspace?** A name, creation time and deduplicated list of web URLs in local extension storage. Cookies, authenticated sessions, navigation history and page contents are not saved.
+
+4. **How did you verify real browser APIs?** An isolated Chromium CI profile loaded the extension, grouped synthetic tabs, closed one duplicate, saved and restored a workspace in a new window, and scheduled/cancelled a real alarm.
+
+5. **Why require a preview before closing duplicates?** Closing tabs changes the browsing session. A separate explicit action makes the affected count visible, while a second eligibility check protects tabs pinned after the preview.
 
 ## Independent exercise
 
@@ -41,6 +45,6 @@ The implementation was developed with substantial AI assistance under Abhijith V
 
 Suggested factual bullet after personally validating the demo:
 
-- Implemented and validated organize crowded browser sessions using Chrome MV3 · JavaScript, with domain grouping and documented correctness checks and limitations.
+- Built a Manifest V3 tab organizer with domain grouping, duplicate review, workspaces and focus alarms; verified 15 local checks and actual Chromium API workflows in CI.
 
 Use [VERIFICATION.md](VERIFICATION.md) to add only measured numbers. Do not claim production traffic, users, savings, upstream acceptance or cloud deployment without corresponding evidence.

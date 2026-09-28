@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "browser": "Playwright bundled Chromium, isolated Linux CI profile",
+  "network": "Synthetic fixture pages; no personal tabs or browser data",
+  "checks": [
+    "Manifest V3 extension and popup loaded",
+    "Actual Chrome tab group created with domain title",
+    "Duplicate preview and explicit closure removed one actual tab",
+    "Workspace persisted via storage API and restored to an actual new window",
+    "Actual timer alarm scheduled, badge set, and timer cancelled"
+  ]
+}

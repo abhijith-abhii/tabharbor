@@ -6,6 +6,8 @@ Original topic: **Browser Tab Manager & Focus Extension** from [the source post]
 
 > Local portfolio implementation developed with Codex assistance. Measured results and limitations are documented; no production adoption, revenue or hiring outcome is claimed.
 
+![Application screenshot](reports/screenshots/app.png)
+
 ## What works
 
 - Domain grouping
@@ -17,9 +19,10 @@ Original topic: **Browser Tab Manager & Focus Extension** from [the source post]
 
 ## Start
 
-Python 3.12 is the validated Python runtime; Node.js 22+ is used for extension tests. Run commands from this repository directory. Windows users activate `.venv\Scripts\activate` instead of `source`.
+Node.js 22+ is used for tests. Run commands from this repository directory. The extension itself runs in Chrome-compatible desktop browsers.
 
 ```sh
+npm ci
 npm test
 # Then load this directory as an unpacked extension in Chrome.
 ```
@@ -44,7 +47,7 @@ Stack: Chrome MV3 · JavaScript.
 npm test
 ```
 
-See [VERIFICATION.md](VERIFICATION.md) for actual executed checks, setup verification, model/data results and any outstanding environment limitations. A workflow file alone is not evidence that CI passed.
+See [VERIFICATION.md](VERIFICATION.md) for actual executed checks, setup verification, model/data results and any outstanding environment limitations. The [recorded CI runs](reports/ci-verification.json) passed for the linked source revision.
 
 ## Data and attribution
 
@@ -59,3 +62,7 @@ Suggested extension: Add a workspace rename button and test validation for empty
 ## Honest portfolio use
 
 This implementation and documentation were developed with substantial Codex assistance. Before presenting it, run the demonstration, explain the design choices, and complete the suggested independent modification. Do not describe generated code as work experience, an accepted upstream contribution, or a deployed production service.
+
+## Isolated browser verification
+
+`npm ci`, `npx playwright install --with-deps chromium`, then `npm run test:browser` exercise the actual extension APIs in a disposable Chromium profile. The Linux CI run passed; synthetic pages are used instead of personal browser data. See [browser evidence](reports/browser-integration.json).
