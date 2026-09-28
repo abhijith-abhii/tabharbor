@@ -10,3 +10,5 @@ Implementation references:
 Only applicable libraries are used; their upstream licenses remain in installed distributions. Project code does not claim authorship of dependencies.
 
 Chrome extension API: https://developer.chrome.com/docs/extensions/reference/api/tabGroups — group APIs, permissions and Manifest V3. No remote resources or telemetry.
+
+The isolated CI extension verification follows the [official Playwright extension testing workflow](https://playwright.dev/docs/chrome-extensions). It uses a disposable Chromium profile and synthetic pages, never personal browser data.
